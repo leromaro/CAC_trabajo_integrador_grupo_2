@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Agregar Plato</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-3">
+    <h2>Agregar Plato</h2>
+    <form action="guardar_plato.php" method="post">
+        <!-- Campos -->
+         <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+            <label for="ingredientes">Ingredientes</label>
+            <textarea class="form-control" id="ingredientes" name="ingredientes"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="tipoPlato">Tipo de Plato</label>
+            <input type="text" class="form-control" id="tipoPlato" name="tipoPlato">
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="imagen">Imagen</label>
+            <input type="file" class="form-control-file" id="imagen" name="imagen">
+        </div>
+        <div class="form-group">
+            <label>Seleccione:</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="alPlato" name="alPlato">
+                <label class="form-check-label" for="alPlato">Al Plato</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="aptoCeliaco" name="aptoCeliaco">
+                <label class="form-check-label" for="aptoCeliaco">Apto Celiaco</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="aptoVegano" name="aptoVegano">
+                <label class="form-check-label" for="aptoVegano">Apto Vegano</label>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-warning" onclick="limpiarFormulario()">Cancelar</button>
+    </form>
+</div>
+
+<<script src="js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
