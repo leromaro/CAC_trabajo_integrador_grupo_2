@@ -9,16 +9,18 @@ import model.Plato;
 
 public class PlatoDao {
     
-    private static final String SQL_SELECT = "SELECT * FROM menu";
-    private static final String SQL_SELECT_BY_NAME = "SELECT id, name, password, baja FROM users WHERE username = ?";
+    private static final String SQL_SELECT = "SELECT * FROM platos";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM platos WHERE platoId = ?";
     private static final String SQL_INSERT = "INSERT INTO platos(nombre, ingredientes, tipoPlato, precio, imagen, alPlato, aptoCeliaco, aptoVegano, enFalta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE platos SET nombre = ?, ingredientes = ?, tipoPlato = ?, precio = ?, imagen = ?, alPlato = ?, aptoCeliaco = ?, aptoVegano = ?, enFalta = ?";
     private static final String SQL_LOGIC_DELETE = "UPDATE platos SET enFalta = ? WHERE platoId = ?";
    
     
-    public List<Plato> seleccionarTodos() {
+    public static List<Plato> seleccionarTodos() {
         Plato plato = null;
         List<Plato> menu = new ArrayList();
+        Blob blob = null;
+        byte[] imagen = null;
 
         try (Connection conn = getConexion(); // try with no necesita finally ni los close en Conexion
             PreparedStatement stmt = conn.prepareStatement(SQL_SELECT);
@@ -30,8 +32,12 @@ public class PlatoDao {
                 String ingredientes = rs.getString("ingredientes");
                 String tipoPlato = rs.getString("tipoPlato");
                 double precio = rs.getDouble("precio");
-                Blob blob = rs.getBlob("imagen");
-                byte[] imagen = blob.getBytes(1, (int)blob.length());
+                
+                if (rs.getBlob("imagen") != null){
+                    blob = rs.getBlob("imagen");
+                    imagen = blob.getBytes(1, (int)blob.length());
+                }
+                                
                 boolean alPlato = rs.getBoolean("alPlato");
                 boolean aptoCeliaco = rs.getBoolean("aptoCeliaco");
                 boolean aptoVegano = rs.getBoolean("aptoVegano");
@@ -47,7 +53,8 @@ public class PlatoDao {
         return menu;
     }
     
-    public int insertar(Plato plato){
+    public static int insertar(Plato plato){
+        System.out.println("Insertando plato en la base de datos...");
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -68,7 +75,9 @@ public class PlatoDao {
             stmt.setBoolean(7, plato.isAptoCeliaco());
             stmt.setBoolean(8, plato.isAptoVegano());
             stmt.setBoolean(9,plato.isEnFalta());
+            
             registros = stmt.executeUpdate();
+            System.out.println("Registros afectados: " + registros);
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace(System.out);
         }
@@ -94,6 +103,7 @@ public class PlatoDao {
             stmt.setString(2, plato.getIngredientes());
             stmt.setString(3,plato.getTipoPlato());
             stmt.setDouble(4, plato.getPrecio());
+            
             Blob blob = conn.createBlob();
             blob.setBytes(1,plato.getImagen());
             stmt.setBlob(5, blob);
@@ -102,7 +112,9 @@ public class PlatoDao {
             stmt.setBoolean(7, plato.isAptoCeliaco());
             stmt.setBoolean(8, plato.isAptoVegano());
             stmt.setBoolean(9,plato.isEnFalta());
+            
             registros = stmt.executeUpdate();
+            
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace(System.out);
         }
@@ -117,7 +129,7 @@ public class PlatoDao {
         return registros;
     }
      
-    public Plato seleccionarPorNombre(String nombreBuscado) {
+    public Plato seleccionarPorId(int id) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -125,8 +137,8 @@ public class PlatoDao {
 
         try {
             conn = getConexion();
-            stmt = conn.prepareStatement(SQL_SELECT_BY_NAME);
-            stmt.setString(1, nombreBuscado);
+            stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
@@ -135,8 +147,10 @@ public class PlatoDao {
                 String ingredientes = rs.getString("ingredientes");
                 String tipoPlato = rs.getString("tipoPlato");
                 double precio = rs.getDouble("precio");
+                
                 Blob blob = rs.getBlob("imagen");
                 byte[] imagen = blob.getBytes(1, (int)blob.length());
+                
                 boolean alPlato = rs.getBoolean("alPlato");
                 boolean aptoCeliaco = rs.getBoolean("aptoCeliaco");
                 boolean aptoVegano = rs.getBoolean("aptoVegano");
@@ -144,7 +158,6 @@ public class PlatoDao {
 
                 plato = new Plato(platoId, nombre, ingredientes, tipoPlato, precio, imagen, alPlato, aptoCeliaco, aptoVegano, enFalta);
 
-                //usuarios.add(user);
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace(System.out);
@@ -157,11 +170,11 @@ public class PlatoDao {
                 ex.printStackTrace(System.out);
             }
         }
-
         return plato;
     }
     
-     public int altaBajaLogica(Plato plato){
+    // controlar este método
+     public int altaBajaLogica(Plato plato, int id){
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -169,8 +182,10 @@ public class PlatoDao {
             conn = getConexion();
             stmt = conn.prepareStatement(SQL_LOGIC_DELETE);
             stmt.setBoolean(1, !plato.isEnFalta());
-            stmt.setInt(2, plato.getPlatoId());
+            stmt.setInt(2, id);
+            
             registros = stmt.executeUpdate();
+            
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace(System.out);
         }

@@ -7,7 +7,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 
 public class Conexion {
-    private static final String DB_CON = "jdbc:mysql://localhost:3306/menu?serverTimezone=UTC";
+    private static final String DB_CON = "jdbc:mysql://localhost:3306/menu?serverTimezone=UTC&useSSL=false";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "1234";
     
@@ -23,7 +23,7 @@ public class Conexion {
    }
     public static Connection getConexion() throws SQLException, ClassNotFoundException{
       
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
 
         return getDataSource().getConnection();
     }

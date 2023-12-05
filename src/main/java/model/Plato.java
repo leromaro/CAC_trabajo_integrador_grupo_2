@@ -1,9 +1,7 @@
 
 package model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +19,7 @@ public class Plato {
     private boolean aptoVegano;
     private boolean enFalta;
 
+    //constructor para craer objeto para subir
     public Plato(String nombre, String ingredientes, String tipoPlato, double precio, byte[] imagen, boolean alPlato, boolean aptoCeliaco, boolean aptoVegano, boolean enFalta) {
         this.nombre = nombre;
         this.ingredientes = ingredientes;
@@ -33,6 +32,7 @@ public class Plato {
         this.enFalta = enFalta;
     }
 
+    //constructor para craer objeto para bajar
     public Plato(int platoId, String nombre, String ingredientes, String tipoPlato, double precio, byte[] imagen, boolean alPlato, boolean aptoCeliaco, boolean aptoVegano, boolean enFalta) {
         this.platoId = platoId;
         this.nombre = nombre;
@@ -45,6 +45,4 @@ public class Plato {
         this.aptoVegano = aptoVegano;
         this.enFalta = enFalta;
     }
-  
-
 }
