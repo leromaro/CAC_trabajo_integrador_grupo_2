@@ -12,7 +12,7 @@ public class PlatoDao {
     private static final String SQL_SELECT = "SELECT * FROM platos";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM platos WHERE platoId = ?";
     private static final String SQL_INSERT = "INSERT INTO platos(nombre, ingredientes, tipoPlato, precio, imagen, alPlato, aptoCeliaco, aptoVegano, enFalta) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE platos SET nombre = ?, ingredientes = ?, tipoPlato = ?, precio = ?, imagen = ?, alPlato = ?, aptoCeliaco = ?, aptoVegano = ?, enFalta = ?";
+    private static final String SQL_UPDATE = "UPDATE platos SET nombre = ?, ingredientes = ?, tipoPlato = ?, precio = ?, imagen = ?, alPlato = ?, aptoCeliaco = ?, aptoVegano = ?, enFalta = ? WHERE id= ?";
     private static final String SQL_LOGIC_DELETE = "UPDATE platos SET enFalta = ? WHERE platoId = ?";
    
     
@@ -112,6 +112,7 @@ public class PlatoDao {
             stmt.setBoolean(7, plato.isAptoCeliaco());
             stmt.setBoolean(8, plato.isAptoVegano());
             stmt.setBoolean(9,plato.isEnFalta());
+            stmt.setInt(10, plato.getPlatoId());
             
             registros = stmt.executeUpdate();
             
@@ -174,14 +175,14 @@ public class PlatoDao {
     }
     
     // controlar este método
-     public int altaBajaLogica(Plato plato, int id){
+     public int altaBajaLogica(boolean enFalta, int id){
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
         try {
             conn = getConexion();
             stmt = conn.prepareStatement(SQL_LOGIC_DELETE);
-            stmt.setBoolean(1, !plato.isEnFalta());
+            stmt.setBoolean(1, !enFalta);
             stmt.setInt(2, id);
             
             registros = stmt.executeUpdate();
