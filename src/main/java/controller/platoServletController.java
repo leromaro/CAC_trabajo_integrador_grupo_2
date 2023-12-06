@@ -15,7 +15,12 @@ import java.util.logging.Logger;
 import model.Plato;
 
 @WebServlet("/menu")
-@MultipartConfig
+@MultipartConfig(
+        location = "/media/temp",
+        fileSizeThreshold = 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 5,
+        maxRequestSize = 1024 * 1024 * 10
+)
 public class platoServletController extends HttpServlet {
 
     private static final Logger LOGGER = Logger.getLogger(platoServletController.class.getName());
@@ -72,27 +77,35 @@ public class platoServletController extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try {
-            Part filePart = req.getPart("imagen");
-            InputStream fileContent = filePart.getInputStream();
-            byte[] imagenBytes = fileContent.readAllBytes();
+            req.setCharacterEncoding("UTF-8");
 
-            String nombre = req.getParameter("nombre");
-            String ingredientes = req.getParameter("ingredientes");
-            String tipoPlato = req.getParameter("tipoPlato");
-            double precio = Double.parseDouble(req.getParameter("precio"));
+            String route = req.getParameter("action");
 
-            // Obtener valores de checkboxes
-            Boolean[] checkboxValues = new Boolean[4];
-            String[] checkboxNames = {"alPlato", "aptoCeliaco", "aptoVegano", "enFalta"};
+            switch (route) {
+                case "add":
+                    String nombre = req.getParameter("nombre");
+                    String ingredientes = req.getParameter("ingredientes");
+                    String tipoPlato = req.getParameter("tipoPlato");
+                    double precio = Double.parseDouble(req.getParameter("precio"));
 
-            for (int i = 0; i < checkboxNames.length; i++) {
-                String checkboxValue = req.getParameter(checkboxNames[i]);
-                checkboxValues[i] = checkboxValue != null && checkboxValue.equals("true");
+                    Part filePart = req.getPart("imagen");
+                    InputStream fileContent = filePart.getInputStream();
+                    byte[] imagenBytes = fileContent.readAllBytes();
+
+                    // Obtener valores de checkboxes
+                    Boolean[] checkboxValues = new Boolean[4];
+                    String[] checkboxNames = {"alPlato", "aptoCeliaco", "aptoVegano", "enFalta"};
+
+                    for (int i = 0; i < checkboxNames.length; i++) {
+                        String checkboxValue = req.getParameter(checkboxNames[i]);
+                        checkboxValues[i] = checkboxValue != null && checkboxValue.equals("true");
+                    }
+                    Plato nuevoPlato = new Plato(nombre, ingredientes, tipoPlato, precio, imagenBytes, checkboxValues[0], checkboxValues[1], checkboxValues[2], checkboxValues[3]);
+
+                    PlatoDao.insertar(nuevoPlato);
             }
 
-            Plato nuevoPlato = new Plato(nombre, ingredientes, tipoPlato, precio, imagenBytes, checkboxValues[0], checkboxValues[1], checkboxValues[2], checkboxValues[3]);
-
-            PlatoDao.insertar(nuevoPlato);
+            
 
             res.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception e) {
