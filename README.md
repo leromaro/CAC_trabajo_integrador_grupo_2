@@ -7,10 +7,10 @@
 ### Año 2023- Comisión 23555 - Grupo 2
 
 **Integrantes del equipo:**
-*Gabriel Rolón*
-*Geremías Mannino*
-*Facundo Ballarini*
-*Juan Manuel Iglesias*
-*Felipe Gonsebatt*
-*Rodrigo Pinto*
+*Gabriel Rolón - *
+*Geremías Mannino -*
+*Facundo Ballarini - *
+*Juan Manuel Iglesias - *
+*Felipe Gonsebatt - *
+*Rodrigo Pinto - *
 *Leandro Marino*
