@@ -4,8 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Tu Menu</title>
+        <link rel="icon" href="media/icon.ico" type="image/x-icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     </head>
     <body>
@@ -16,7 +18,7 @@
                 <img src="media/logo.png" class="img-fluid" alt="logo" id="logo">
                 Restaurante CAC - Grupo2
             </a>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse mx-4" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link btn btn-outline-success" href="pages/agregar_plato.html" role="button">Agregar Plato</a>
@@ -25,15 +27,23 @@
             </div>
             <form class="form-inline ml-auto" role="search">
                 <div class="d-flex align-items-center">
-                    <input class="form-control mr-2" type="search" placeholder="Buscar plato" id="buscador">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="buscarPlato">Buscar</button>
+                    <input class="form-control mx-2" type="search" placeholder="Buscar plato" id="buscador">
+                    <button class="btn btn-outline-success my-2 mx-2 my-sm-0" type="submit" id="buscarPlato">Buscar</button>
                 </div>
             </form> 
         </nav>
 
         <!-- Contenido principal -->
-        <div class="bg-danger py-3" id="titulo">
-            <h1 class="py-3 ps-4 text-light">Platos del menú</h1>
+        <div class="bg-secondary py-3 d-flex align-items-center justify-content-between" id="titulo">
+            <div>
+                <h1 class="py-3 ps-4 text-light">Platos del menú</h1>
+            </div>
+            <div class="p-4 mb-4">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="mostrarTodo" checked>
+                    <label class="form-check-label" for="mostrarTodo">Mostrar todo</label>
+                </div>
+            </div>
         </div>
 
         <!-- Cards -->
@@ -41,11 +51,24 @@
             <div class="row mt-3" id="menu"></div>
         </main>
 
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="cerrarModal()">&times;</span>
+                <main class="container my-3">
+                    <div class="row mt-3" id="informacionPlato">
+                    </div>  
+                </main>
+                <div class="container my-3" id="btnModal">
+                </div>      
+            </div>
+        </div>
 
         <script src="js/getRequests.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     </body>
 </html>

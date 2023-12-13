@@ -7,9 +7,32 @@ document.addEventListener('DOMContentLoaded', function () {
     imagenElement.addEventListener('change', function () {
         const selectedImage = imagenElement.files[0];
         if (selectedImage) {
+            // Verificar si el archivo es una imagen
+            if (!/^image\//.test(selectedImage.type)) {
+                Toastify({
+                    text: "Por favor, selecciona un archivo de imagen válido.",
+                    style: {
+                        background: "linear-gradient(to right, #dc3545, #dc3545)",
+                    },
+                    duration: 3000
+                }).showToast();
+                limpiarFormulario();
+                return;
+            }
+            //if (selectedImage.size > 65535) {
+            //  Toastify({
+            //    text: "El archivo seleccionado supera el tamaño máximo permitido de 65535 bytes.",
+            //  style: {
+            //    background: "linear-gradient(to right, #dc3545, #dc3545)",
+            //},
+            //duration: 3000
+            //}).showToast();
+            //return;
+            //}
+            //
+            //muestro preview
             const reader = new FileReader();
             reader.onload = function (e) {
-                console.log(e);
                 imagenPreview.src = e.target.result;
                 imagenContainer.classList.remove("d-none");
             };
@@ -19,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
+    //btn limpiar form
     const limpiarFormBtn = document.getElementById('limpiarFormBtn');
     limpiarFormBtn.addEventListener('click', function () {
         limpiarFormulario();
     });
 
-    //const guardarFormBtn = document.getElementById('guardarFormBtn');
+    //enviar form
     const addForm = document.getElementById('addForm');
 
     addForm.addEventListener('submit', async function (event) {
@@ -47,10 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         formData.append('tipoPlato', tipoPlatoSeleccionado);
 
-        //for (const entry of formData.entries()) {
-        //    console.log(entry[0], entry[1]);
-        //}
-
         try { // si respondo con un json puedo enviar directamente el mensaje
             const response = await fetch('/app/menu', {
                 method: 'POST',
@@ -60,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 limpiarFormulario();
                 Toastify({
-                    text: "Plato guardado exitosamente",
+                    text: "Plato guardado exitosamente.",
                     style: {
                         background: "linear-gradient(to right, #28a745, #28a745)",
                     },
@@ -68,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }).showToast();
             } else {
                 Toastify({
-                    text: "Plato guardado exitosamente",
+                    text: "Error al guardar el archivo.",
                     style: {
                         background: "linear-gradient(to right, #dc3545, #dc3545)",
                     },
@@ -77,16 +96,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
-                Toastify({
-                    text: "Plato guardado exitosamente",
-                    style: {
-                        background: "linear-gradient(to right, #dc3545, #dc3545)",
-                    },
-                    duration: 3000
-                }).showToast();
+            Toastify({
+                text: "Error en la solicitud, para más información consulte el log.",
+                style: {
+                    background: "linear-gradient(to right, #dc3545, #dc3545)",
+                },
+                duration: 3000
+            }).showToast();
         }
     });
-
+    
+    //fx limpiar form
     function limpiarFormulario() {
         var formulario = document.getElementById('addForm');
         formulario.reset();
