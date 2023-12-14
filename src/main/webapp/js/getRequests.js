@@ -34,7 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const enFaltaCumpleCondicion = mostrarTodo ? true : !plato.enFalta;
             return (nombreIncluyePalabra || ingredientesIncluyenPalabra) && enFaltaCumpleCondicion;
         });
-
+        //ordeno platos en platosFiltrados              deja igual      al final    principio
+        platosFiltrados.sort((a, b) => (a.enFalta === b.enFalta) ? 0 : a.enFalta ? 1 : -1);
+        
         //elimino duplicados
         const platosFiltradosSinDuplicados = Array.from(new Set(platosFiltrados));
         menuCards.innerHTML = "";
@@ -95,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
                </div> 
             `;
         } else {
+            //ordeno platos en data                 deja igual      al final    principio
+            data.sort((a, b) => (a.enFalta === b.enFalta) ? 0 : a.enFalta ? 1 : -1);
             divTitulo.classList.replace('bg-danger', 'bg-secondary');
             data.forEach(plato => {
                 menu.push(plato);

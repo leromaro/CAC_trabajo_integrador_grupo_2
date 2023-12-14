@@ -9,6 +9,10 @@ body {
     height: 3.5rem;
 }
 
+.navbar{
+    background: #353535;
+    /*background : #000000;*/
+}
 #mostrarTodo,
 #mostrarTodo + label {
     color: white;
