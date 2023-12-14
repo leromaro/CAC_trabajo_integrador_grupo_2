@@ -13,7 +13,6 @@ window.mostrarInformacion = function (idS, nombre, ingredientes, tipoPlato, imag
     if (enFalta) {
         enFaltaP = `<p class="card-text">¡En falta!</p>`;
         colorEnFalta = "colorCartaEnFalta";
-
     } else {
         enFaltaP = "";
         colorEnFalta = "";

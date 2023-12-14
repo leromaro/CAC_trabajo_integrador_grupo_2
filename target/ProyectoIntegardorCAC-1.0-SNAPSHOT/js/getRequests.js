@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (data.length === 0) {
             divTitulo.classList.replace('bg-secondary', 'bg-danger');
             menuCards.innerHTML += `
-                <div class="col-md-3 mb-4 ident">
-                   <div class="card h-100 animate-hover-card">
+                <div class="col-md-3 mb-4">
+                   <div class="card h-100">
                        <img src="media/sinPlatos.png" class="card-img-top h-75" alt="sin plato">
                        <div class="card-body">
                            <h5 class="card-title">Sin platos</h5>
