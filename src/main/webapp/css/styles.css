@@ -4,7 +4,13 @@
     font-family: 'Lobster', sans-serif;
 }
 
+html {
+    background: #353535;
+}
+
 .background {
+    background: #353535;
+
     min-height: 100vh;
     width: 100%;
     height: 100%;
@@ -18,6 +24,8 @@
 
 
 #titulo {
+
+    color: aliceblue;
     text-shadow:
         -2px -2px 0 #000000,
         2px -2px 0 #000000,
