@@ -18,7 +18,11 @@
 
 
 #titulo {
-    background-color: #7c7979 !important;
+    text-shadow:
+        -2px -2px 0 #000000,
+        2px -2px 0 #000000,
+        -2px 2px 0 #000000,
+        2px 2px 0 #000000;
 }
 
 #logo {
@@ -73,11 +77,13 @@
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
+
 /*Modificamos el tamaño y color del html agregar platos*/
 
-.background>div>h1{
+.background>div>h1 {
     text-align: center;
 }
+
 .text-color {
     font-size: 20px;
     color: aliceblue;
@@ -108,7 +114,7 @@ body>footer>div {
     flex-wrap: wrap;
     margin-top: 3px;
     margin-bottom: 15px;
-    color: aliceblue;
+    color: rgb(204, 205, 206);
 }
 
 
@@ -118,7 +124,7 @@ body>footer>nav>div>a {
     margin-top: 20px;
     margin-left: 20px;
     margin-right: 20px;
-    color: aliceblue;
+    color: rgb(204, 205, 206);
     text-decoration: none;
     text-align: justify;
     transition: transform 0.3s, color 0.3s;
@@ -128,4 +134,3 @@ body>footer>nav>div>a:hover {
     transform: scale(1.1);
     color: #7c7979;
 }
-
