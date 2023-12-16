@@ -1,28 +1,44 @@
-body {
-    background-image: url('../media/fondo.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: rgba(178, 180, 179, 1);
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lobster', sans-serif;
 }
 
-#logo{
+.background {
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    background-image: url('../media/fondo.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: transparent;
+}
+
+
+#titulo {
+    background-color: #7c7979 !important;
+}
+
+#logo {
     height: 3.5rem;
 }
 
-.navbar{
+.navbar {
     background: #353535;
-    /*background : #000000;*/
 }
+
 #mostrarTodo,
-#mostrarTodo + label {
+#mostrarTodo+label {
     color: white;
 }
 
-.animate-hover-card{
+.animate-hover-card {
     transition: transform 0.2s ease-in;
 }
 
-.animate-hover-card:hover{
+.animate-hover-card:hover {
     cursor: pointer;
     transform: scale(1.03);
 }
@@ -57,3 +73,59 @@ body {
     background: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
+/*Modificamos el tamaño y color del html agregar platos*/
+
+.background>div>h1{
+    text-align: center;
+}
+.text-color {
+    font-size: 20px;
+    color: aliceblue;
+    text-shadow:
+        -1px -1px 0 #000000,
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000;
+}
+
+/*Modificamos el footer*/
+body>footer {
+    font-size: larger;
+    background-color: #353535;
+
+}
+
+body>footer>nav>div {
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+body>footer>div {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3px;
+    margin-bottom: 15px;
+    color: aliceblue;
+}
+
+
+
+
+body>footer>nav>div>a {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: aliceblue;
+    text-decoration: none;
+    text-align: justify;
+    transition: transform 0.3s, color 0.3s;
+}
+
+body>footer>nav>div>a:hover {
+    transform: scale(1.1);
+    color: #7c7979;
+}
+
