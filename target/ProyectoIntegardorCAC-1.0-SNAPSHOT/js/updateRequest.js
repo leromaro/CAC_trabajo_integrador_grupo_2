@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-=======
 var imagenDefectoFile = null;
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
 document.addEventListener('DOMContentLoaded', function () {
 // Obtener parámetros de la URL
     const queryParams = new URLSearchParams(window.location.search);
     const platoDetailId = {
         id: queryParams.get("id")
     };
-
+    console.log("plato id: " + platoDetailId);
     //Imagen
     const imagenElement = document.getElementById('imagen');
     const imagenPreview = document.getElementById('imagenPreview');
@@ -23,21 +20,21 @@ document.addEventListener('DOMContentLoaded', function () {
         imagen: "",
         alPlato: false,
         aptoCeliaco: false,
-<<<<<<< HEAD
-        aptoVegano: false
-=======
         aptoVegano: false,
         enFalta: false
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
     };
 
     function loadPlato() {
         fetch(`/app/menu?action=getById&id=${platoDetailId.id}`)
                 .then(response => response.json())
                 .then(data => {
+                        
+
                     //Llenar los campos en la página de modificar
                     document.getElementById('nombre').value = data.nombre;
+                    console.log("data: " + data.nombre);
                     document.getElementById('ingredientes').value = data.ingredientes;
+                    console.log("data: " + data.ingredientes);
 
                     const tipoPlatoRadios = document.getElementsByName('tipoPlato');
                     for (const radio of tipoPlatoRadios) {
@@ -48,17 +45,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     document.getElementById('precio').value = parseFloat(data.precio);
+                                        console.log("data: " + data.precio);
+
                     const alPlatoCheck = document.querySelector('#alPlato');
                     alPlatoCheck.checked = data.alPlato;
+                                        console.log("data: " + data.alPlato);
+
                     const aptoCeliacoCheck = document.querySelector('#aptoCeliaco');
                     aptoCeliacoCheck.checked = data.aptoCeliaco;
+                                        console.log("data: " + data.aptoCeliaco);
+
                     const aptoVeganoCheck = document.querySelector('#aptoVegano');
                     aptoVeganoCheck.checked = data.aptoVegano;
-<<<<<<< HEAD
-=======
+                                        console.log("data: " + data.aptoVegano);
+
                     const enFaltaCheck = document.querySelector('#enFalta');
                     enFaltaCheck.checked = data.enFalta;
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
+                                        console.log("data: " + data.enFalta);
+
 
                     imagenPreview.src = `data:img/jpeg;base64,${data.imagenBase64}`;
 
@@ -71,10 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     plato.alPlato = data.alPlato;
                     plato.aptoCeliaco = data.aptoCeliaco;
                     plato.aptoVegano = data.aptoVegano;
-<<<<<<< HEAD
-=======
                     plato.enFalta = data.enFalta;
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                 });
     }
 
@@ -95,21 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 limpiarFormulario();
                 return;
             }
-<<<<<<< HEAD
-            //if (selectedImage.size > 65535) {
-            //  Toastify({
-            //    text: "El archivo seleccionado supera el tamaño máximo permitido de 65535 bytes.",
-            //  style: {
-            //    background: "linear-gradient(to right, #dc3545, #dc3545)",
-            //},
-            //duration: 3000
-            //}).showToast();
-            //return;
-            //}
-            //
-=======
 
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
             //muestro preview
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -149,12 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('tipoPlato', tipoPlatoSeleccionado);
 
         //Obtener imagen
-<<<<<<< HEAD
-        const selectedImage = imagenElement.files[0];
-        if (selectedImage) {
-            formData.append('imagen', selectedImage);
-        }
-=======
 //        const selectedImage = imagenElement.files[0];
 //        if (selectedImage) {
 //            formData.append('imagen', selectedImage);
@@ -168,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         formData.set('imagen', imagenBlob, 'imagen');
 
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
         try {
             const response = await fetch('/app/menu', {
                 method: 'POST',

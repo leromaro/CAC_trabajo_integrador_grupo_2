@@ -49,6 +49,52 @@ public class PlatoDao {
         return menu;
     }
 
+    public static Plato seleccionarPorId(int id) {
+        System.out.println("DAO seleccionar por id " + id);
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Plato plato = null;
+
+        try {
+            conn = getConexion();
+            stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int platoId = rs.getInt(1);
+                String nombre = rs.getString("nombre");
+                String ingredientes = rs.getString("ingredientes");
+                String tipoPlato = rs.getString("tipoPlato");
+                double precio = rs.getDouble("precio");
+
+                Blob blob = rs.getBlob("imagen");
+                byte[] imagen = blob.getBytes(1, (int) blob.length());
+
+                boolean alPlato = rs.getBoolean("alPlato");
+                boolean aptoCeliaco = rs.getBoolean("aptoCeliaco");
+                boolean aptoVegano = rs.getBoolean("aptoVegano");
+                boolean enFalta = rs.getBoolean("enFalta");
+
+                plato = new Plato(platoId, nombre, ingredientes, tipoPlato, precio, imagen, alPlato, aptoCeliaco, aptoVegano, enFalta);
+                System.out.println("Plato solicitado " + plato.getPlatoId());
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            try {
+                close(rs);
+                close(stmt);
+                close(conn);
+            } catch (SQLException ex) {
+                ex.printStackTrace(System.out);
+            }
+        }
+        return plato;
+    }
+
     public static int insertar(Plato plato) {
         System.out.println("DAO insertar");
         Connection conn = null;
@@ -126,55 +172,8 @@ public class PlatoDao {
         return registros;
     }
 
-    public static Plato seleccionarPorId(int id) {
-        System.out.println("DAO seleccionar por id " + id);
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Plato plato = null;
-
-        try {
-            conn = getConexion();
-            stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int platoId = rs.getInt(1);
-                String nombre = rs.getString("nombre");
-                String ingredientes = rs.getString("ingredientes");
-                String tipoPlato = rs.getString("tipoPlato");
-                double precio = rs.getDouble("precio");
-
-                Blob blob = rs.getBlob("imagen");
-                byte[] imagen = blob.getBytes(1, (int) blob.length());
-
-                boolean alPlato = rs.getBoolean("alPlato");
-                boolean aptoCeliaco = rs.getBoolean("aptoCeliaco");
-                boolean aptoVegano = rs.getBoolean("aptoVegano");
-                boolean enFalta = rs.getBoolean("enFalta");
-
-                plato = new Plato(platoId, nombre, ingredientes, tipoPlato, precio, imagen, alPlato, aptoCeliaco, aptoVegano, enFalta);
-                System.out.println("Plato solicitado " + plato.getPlatoId());
-            }
-        } catch (ClassNotFoundException | SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            try {
-                close(rs);
-                close(stmt);
-                close(conn);
-            } catch (SQLException ex) {
-                ex.printStackTrace(System.out);
-            }
-        }
-        return plato;
-    }
-
-    // controlar este método
     public static int altaBajaLogica(boolean enFalta, int id) {
-        System.out.println("DAO altaBajaLógica  en falta " + enFalta +  " id " + id);
+        System.out.println("DAO altaBajaLógica  en falta " + enFalta + " id " + id);
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
