@@ -70,7 +70,11 @@ public class platoServletController extends HttpServlet {
                     } else {
                         imageBytes = new byte[0];
                     }
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                     String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
                     platoUpdate.setImagenBase64(imageBase64);
                     mapper.writeValue(res.getWriter(), platoUpdate);
@@ -114,7 +118,10 @@ public class platoServletController extends HttpServlet {
                     precio = Double.parseDouble(req.getParameter("precio"));
 
                     filePart = req.getPart("imagen");
+<<<<<<< HEAD
                     System.out.println(filePart);
+=======
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                     fileContent = filePart.getInputStream();
                     imagenBytes = fileContent.readAllBytes();
 
@@ -137,6 +144,7 @@ public class platoServletController extends HttpServlet {
                     precio = Double.parseDouble(req.getParameter("precio"));
 
                     filePart = req.getPart("imagen");
+<<<<<<< HEAD
                     if (filePart.getSize() > 0) {
                         fileContent = filePart.getInputStream();
                         imagenBytes = fileContent.readAllBytes();
@@ -146,6 +154,12 @@ public class platoServletController extends HttpServlet {
                             imagenBytes = existingPlato.getImagen();
                         }
                     }
+=======
+                    System.out.println(filePart);
+                    fileContent = filePart.getInputStream();
+                    imagenBytes = fileContent.readAllBytes();
+
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                     // Obtener valores de checkboxes
                     String[] checkboxNames1 = {"alPlato", "aptoCeliaco", "aptoVegano", "enFalta"};
                     for (int i = 0; i < checkboxNames1.length; i++) {

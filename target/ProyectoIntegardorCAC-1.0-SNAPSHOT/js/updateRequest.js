@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+var imagenDefectoFile = null;
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
 document.addEventListener('DOMContentLoaded', function () {
 // Obtener parámetros de la URL
     const queryParams = new URLSearchParams(window.location.search);
@@ -19,7 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
         imagen: "",
         alPlato: false,
         aptoCeliaco: false,
+<<<<<<< HEAD
         aptoVegano: false
+=======
+        aptoVegano: false,
+        enFalta: false
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
     };
 
     function loadPlato() {
@@ -45,6 +54,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     aptoCeliacoCheck.checked = data.aptoCeliaco;
                     const aptoVeganoCheck = document.querySelector('#aptoVegano');
                     aptoVeganoCheck.checked = data.aptoVegano;
+<<<<<<< HEAD
+=======
+                    const enFaltaCheck = document.querySelector('#enFalta');
+                    enFaltaCheck.checked = data.enFalta;
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
 
                     imagenPreview.src = `data:img/jpeg;base64,${data.imagenBase64}`;
 
@@ -57,6 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     plato.alPlato = data.alPlato;
                     plato.aptoCeliaco = data.aptoCeliaco;
                     plato.aptoVegano = data.aptoVegano;
+<<<<<<< HEAD
+=======
+                    plato.enFalta = data.enFalta;
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                 });
     }
 
@@ -77,6 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 limpiarFormulario();
                 return;
             }
+<<<<<<< HEAD
             //if (selectedImage.size > 65535) {
             //  Toastify({
             //    text: "El archivo seleccionado supera el tamaño máximo permitido de 65535 bytes.",
@@ -88,6 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
             //return;
             //}
             //
+=======
+
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
             //muestro preview
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -127,10 +149,26 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('tipoPlato', tipoPlatoSeleccionado);
 
         //Obtener imagen
+<<<<<<< HEAD
         const selectedImage = imagenElement.files[0];
         if (selectedImage) {
             formData.append('imagen', selectedImage);
         }
+=======
+//        const selectedImage = imagenElement.files[0];
+//        if (selectedImage) {
+//            formData.append('imagen', selectedImage);
+//        }
+
+        if (imagenPreview.src === imagenDefectoFile) {
+            var imagenBlob = await fetch(imagenDefectoFile).then(res => res.blob());
+        } else {
+            var imagenBlob = await fetch(imagenPreview.src).then(res => res.blob())
+        }
+
+        formData.set('imagen', imagenBlob, 'imagen');
+
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
         try {
             const response = await fetch('/app/menu', {
                 method: 'POST',

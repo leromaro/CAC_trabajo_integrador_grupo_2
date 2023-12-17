@@ -8,6 +8,16 @@ body {
 #logo{
     height: 3.5rem;
 }
+
+.navbar{
+    background: #353535;
+    /*background : #000000;*/
+}
+#mostrarTodo,
+#mostrarTodo + label {
+    color: white;
+}
+
 .animate-hover-card{
     transition: transform 0.2s ease-in;
 }
@@ -32,4 +42,21 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 9999;
+<<<<<<< HEAD
+=======
+}
+
+.colorCartaEnFalta {
+    position: relative;
+    overflow: hidden;
+}
+
+.colorCartaEnFalta::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
 }
