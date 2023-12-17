@@ -47,7 +47,7 @@ window.mostrarInformacion = function (idS, nombre, ingredientes, tipoPlato, imag
     const btnModal = document.getElementById('btnModal');
     btnModal.innerHTML = `
         <button type="button" class="btn btn-danger ident" id="borrarBtn" data-plato-id = ${id}>Baja</button>
-        <button type="button" class="btn btn-warning ident" id="modificarBtn" data-plato-id = ${id}>Modificar</button>
+        <button type="button" class="btn btn-warning ident mx-3 my-3" id="modificarBtn" data-plato-id = ${id}>Modificar</button>
         <button type="button" class="btn btn-secondary" id="cerrarBtn">Cerrar</button>
     `;
 
@@ -138,7 +138,6 @@ function borrarPlato(id) {
             });
 }
 function modificarPlato(id) {
-    console.log("entra")
     cerrarBtn.classList.add('d-none');
     borrarBtn.classList.add('d-none');
     modificarBtn.classList.add('d-none');
@@ -163,7 +162,8 @@ function modificarPlato(id) {
                 }).showToast();
                 setTimeout(function () {
                     // Redirigir a la página
-                    //window.location.href = `/app/pages/modificar_plato.html?${queryParams.toString()}`;
+                    console.log(queryParams.toString())
+                    window.location.href = `/app/pages/modificar_plato.html?${queryParams.toString()}`;
                     cerrarBtn.classList.remove('d-none');
                     borrarBtn.classList.remove('d-none');
                     modificarBtn.classList.remove('d-none');

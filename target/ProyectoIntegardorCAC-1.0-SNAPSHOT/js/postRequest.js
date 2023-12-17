@@ -16,23 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     duration: 3000
                 }).showToast();
-//<<<<<<< HEAD
-//                limpiarFormulario();
-//=======
-//>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                 return;
             }
-            //if (selectedImage.size > 65535) {
-            //  Toastify({
-            //    text: "El archivo seleccionado supera el tamaño máximo permitido de 65535 bytes.",
-            //  style: {
-            //    background: "linear-gradient(to right, #dc3545, #dc3545)",
-            //},
-            //duration: 3000
-            //}).showToast();
-            //return;
-            //}
-            //
             //muestro preview
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -57,8 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
     addForm.addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        const formData = new FormData(addForm);
+        const guardarBtn = document.getElementById("guardarFormBtn");
+        const limpiarBtn = document.getElementById("limpiarFormBtn");
 
+        guardarBtn.classList.add('d-none');
+        limpiarBtn.classList.add('d-none');
+
+        const formData = new FormData(addForm);
         formData.append('action', "add");
 
         // Obtener el valor del tipo de plato seleccionado y agregar al FormData
@@ -88,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     duration: 3000
                 }).showToast();
+                setTimeout(function () {
+                    document.documentElement.scrollTop = 0;
+                    guardarBtn.classList.remove('d-none');
+                    limpiarBtn.classList.remove('d-none');
+                }, 3000);
+
             } else {
                 Toastify({
                     text: "Error al guardar el archivo.",
@@ -108,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }).showToast();
         }
     });
-    
+
     //fx limpiar form
     function limpiarFormulario() {
         var formulario = document.getElementById('addForm');

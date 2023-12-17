@@ -53,7 +53,6 @@ html {
 }
 
 .navIndex {
-
     font-size: 20px;
     color: aliceblue;
     text-decoration: none;
@@ -99,6 +98,12 @@ html {
     width: 100vw;
     height: 100vh;
     z-index: 9999;
+}
+
+.card-img-top{
+    height: 500px;
+    object-fit: contain;
+    border-radius: 10px;
 }
 
 .colorCartaEnFalta {
