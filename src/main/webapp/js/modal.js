@@ -10,6 +10,8 @@ window.mostrarInformacion = function (idS, nombre, ingredientes, tipoPlato, imag
 
     //cargo info en el modal
     const informacionPlato = document.getElementById('informacionPlato');
+    const imagenBase64 = `data:img/jpeg;base64,${imagen}`;
+    const imagenHtml = `<img src="${imagenBase64}" class="card-img-top" alt="foto plato" id="imagen">`;
     if (enFalta) {
         enFaltaP = `<p class="card-text">¡En falta!</p>`;
         colorEnFalta = "colorCartaEnFalta";
@@ -36,9 +38,9 @@ window.mostrarInformacion = function (idS, nombre, ingredientes, tipoPlato, imag
                </div>
            </div>
            <div class="col-md-6 mb-8 ident">
-               <div class="clearfix text-center">
-                   <img src="data:img/jpeg;base64,${imagen}" class="card-img-top h-50" alt="foto plato" id="imagen">               
-               </div>
+           <div class="clearfix text-center">
+               ${imagenHtml}
+           </div>
            </div>
        </div>
     `;
@@ -74,16 +76,7 @@ window.mostrarInformacion = function (idS, nombre, ingredientes, tipoPlato, imag
     document.getElementById('cerrarBtn').addEventListener('click', function () {
         cerrarModal();
     });
-    function cerrarModal() {
-        const modal = document.getElementById('modal');
-        const informacionPlato = document.getElementById('informacionPlato');
-        informacionPlato.innerHTML = "";
-        document.getElementById('borrarBtn').removeEventListener('click', borrarPlato);
-        document.getElementById('modificarBtn').removeEventListener('click', modificarPlato);
-        document.getElementById('cerrarBtn').removeEventListener('click', cerrarModal);
-        modal.style.display = 'none';
-    }
-    
+
     //evento altaBaja
     document.getElementById('borrarBtn').addEventListener('click', function () {
         event.stopPropagation();
@@ -145,34 +138,38 @@ function borrarPlato(id) {
             });
 }
 function modificarPlato(id) {
+    console.log("entra")
     cerrarBtn.classList.add('d-none');
     borrarBtn.classList.add('d-none');
     modificarBtn.classList.add('d-none');
 
     fetch(`/app/menu?action=getDetails&id=${id}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Error al envíar el plato. Código de estado: ${response.status}`);
-            }
-            return response.json(); // Parsear la respuesta como JSON
-        })
-        .then(data => {
-            const queryParams = new URLSearchParams({
-                id: data.platoId
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al envíar el plato. Código de estado: ${response.status}`);
+                }
+                return response.json(); // Parsear la respuesta como JSON
+            })
+            .then(data => {
+                const queryParams = new URLSearchParams({
+                    id: data.platoId
+                });
+                Toastify({
+                    text: "Plato enviado a modificar.",
+                    style: {
+                        background: `linear-gradient(to right, ${color})`,
+                    },
+                    duration: 2000
+                }).showToast();
+                setTimeout(function () {
+                    // Redirigir a la página
+                    //window.location.href = `/app/pages/modificar_plato.html?${queryParams.toString()}`;
+                    cerrarBtn.classList.remove('d-none');
+                    borrarBtn.classList.remove('d-none');
+                    modificarBtn.classList.remove('d-none');
+                }, 2000);
+            })
+            .catch(error => {
+                console.error('Error en la solicitut GET:', error.message);
             });
-            Toastify({
-                text: "Enviado a modificar",
-                style: {
-                    background: `linear-gradient(to right, ${color})`,
-                },
-                duration: 2000
-            }).showToast();
-            setTimeout(function () {
-                // Redirigir a la página
-                window.location.href = `/app/pages/modificar_plato.html?${queryParams.toString()}`;
-            }, 2000);
-        })
-        .catch(error => {
-            console.error('Error en la solicitut GET:', error.message);
-        });
 }

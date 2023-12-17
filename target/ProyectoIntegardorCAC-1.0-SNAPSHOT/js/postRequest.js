@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     duration: 3000
                 }).showToast();
-<<<<<<< HEAD
-                limpiarFormulario();
-=======
->>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
+//<<<<<<< HEAD
+//                limpiarFormulario();
+//=======
+//>>>>>>> f052988b9235ea51c3b1c0a157fe83c7c2ac3714
                 return;
             }
             //if (selectedImage.size > 65535) {

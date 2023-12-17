@@ -1,25 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Agregar Plato</title>
-        <link rel="icon" href="../media/icon.ico" type="image/x-icon">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/styles.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    </head>
-    <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-            <a class="navbar-brand" href="../index.html">
-                <img src="../media/logo.png" class="img-fluid" alt="logo" id="logo">
-                Restaurante CAC - Grupo2
-            </a>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Agregar Plato</title>
+    <link rel="icon" href="../media/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark  ">
+            <div class="container-fluid ">
+                <a class="navbar-brand" href="../index.html">
+                    <img src="../media/logo.png" class="img-fluid" alt="logo" id="logo">
+                    Restaurante CAC - Grupo2
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+            <div class="collapse navbar-collapse justify-content-end align-items-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Fotos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
+    </header>
+    <main class="background">
         <!-- Contenido principal -->
-        <div class="bg-secondary py-3">
-            <h1 class="py-3 ps-4 text-light">Agregar plato</h1>
+        <div class="py-3 ">
+            <h1 id="titulo" class="py-3 ps-4 animate__animated animate__rubberBand">Agregar plato</h1>
         </div>
         <div class="container mt-3">
             <form class="mb-4" id="addForm" method="post" enctype="multipart/form-data">
@@ -36,60 +66,70 @@
                                         </div>
 
                                         <div class="form-floating my-3">
-                                            <textarea class="form-control" id="ingredientes" name="ingredientes"></textarea>
+                                            <textarea class="form-control" id="ingredientes"
+                                                name="ingredientes"></textarea>
                                             <label for="ingredientes">Ingredientes</label>
                                         </div>
-                                        <div class="form-floating my-3">                                               
-                                            <input type="number" class="form-control" id="precio" name="precio" step="5" required>
+                                        <div class="form-floating my-3">
+                                            <input type="number" class="form-control" id="precio" name="precio" step="5"
+                                                required>
                                             <label for="precio">Precio</label>
                                         </div>
 
-                                        <div class="my-3">    
+                                        <div class="my-3 text-color">
                                             <label for="tipoPlato" class="form-label">Tipo de Plato</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoPlato" id="principal" value="principal" required>
+                                        <div class="form-check form-check-inline text-color">
+                                            <input class="form-check-input " type="radio" name="tipoPlato"
+                                                id="principal" value="principal" required>
                                             <label class="form-check-label" for="principal">Principal</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoPlato" id="entrada" value="entrada" required>
+                                        <div class="form-check form-check-inline text-color">
+                                            <input class="form-check-input" type="radio" name="tipoPlato" id="entrada"
+                                                value="entrada" required>
                                             <label class="form-check-label" for="entrada">Entrada</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoPlato" id="postre" value="postre" required>
+                                        <div class="form-check form-check-inline text-color">
+                                            <input class="form-check-input" type="radio" name="tipoPlato" id="postre"
+                                                value="postre" required>
                                             <label class="form-check-label" for="postre">Postre</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="tipoPlato" id="aperitivo" value="aperitivo" required>
+                                        <div class="form-check form-check-inline text-color">
+                                            <input class="form-check-input" type="radio" name="tipoPlato" id="aperitivo"
+                                                value="aperitivo" required>
                                             <label class="form-check-label" for="aperitivo">Aperitivo</label>
                                         </div>
 
-                                        <div class="form-floating my-3">          
+                                        <div class="form-floating my-3 text-color">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="alPlato" name="alPlato" value="true">
+                                                <input type="checkbox" class="form-check-input" id="alPlato"
+                                                    name="alPlato" value="true">
                                                 <label class="form-check-label" for="alPlato">Al plato</label>
                                             </div>
                                         </div>
-                                        <div class="form-floating my-6"> 
+                                        <div class="form-floating my-6 text-color">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="aptoCeliaco" name="aptoCeliaco" value="true">
+                                                <input type="checkbox" class="form-check-input" id="aptoCeliaco"
+                                                    name="aptoCeliaco" value="true">
                                                 <label class="form-check-label" for="aptoCeliaco">Apto celíaco</label>
                                             </div>
                                         </div>
-                                        <div class="form-floating my-3">     
+                                        <div class="form-floating my-3 text-color">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="aptoVegano" name="aptoVegano" value="true">
+                                                <input type="checkbox" class="form-check-input" id="aptoVegano"
+                                                    name="aptoVegano" value="true">
                                                 <label class="form-check-label" for="aptoVegano">Apto vegano</label>
                                             </div>
                                         </div>
-                                        <div class="form-floating my-3">     
+                                        <div class="form-floating my-3 text-color">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="enFalta" name="enFalta" value="true">
+                                                <input type="checkbox" class="form-check-input" id="enFalta"
+                                                    name="enFalta" value="true">
                                                 <label class="form-check-label" for="enFalta">En falta</label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 ">
                                         <div class="input-group my-3">
                                             <label class="input-group-text" for="imagen">Imagen</label>
                                             <input type="file" class="form-control" id="imagen" name="imagen" required>
@@ -108,13 +148,29 @@
                 </div>
             </form>
         </div>
+    </main>
+    <footer>
+        <nav>
+            <div>
+                <a href="../index.html"> Restaurante CAC - Grupo2</a>
+                <a href="#">Nosotros</a>
+                <a href="#">Fotos</a>
+                <a href="#">Contacto</a>
+                <a href="#">Instagram</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </nav>
+        <div class="copy">Calle falsa 123, Buenos Aires, Argentina
+            &copy; 2023 - Restaurante CAC - Grupo2</div>
+    </footer>
+    <script src="../js/postRequest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+</body>
 
-        <script src="../js/postRequest.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        
-    </body>
 </html>
